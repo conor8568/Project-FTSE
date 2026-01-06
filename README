@@ -1,0 +1,46 @@
+FTSE 100 Risk & Portfolio Analysis
+
+This project analyses FTSE 100 equities to compare risk–return characteristics, correlations, and diversification benefits, and to construct simple benchmark portfolios using historical UK equity data.
+
+Contents
+- Data pull from Yahoo Finance
+- Volatility and risk analysis
+- Correlation heatmap
+- Portfolio construction (benchmark portfolios)
+- Exported charts for portfolio and presentation use
+
+How to run
+1. Open the RStudio project: **Project FTSE**
+2. Run scripts in order:
+   - `scripts/01_download_data.R`
+   - `scripts/02_clean_returns.R`
+   - `scripts/03_analysis_portfolios.R`
+   - `scripts/04_make_charts.R`
+
+Outputs
+Chart outputs are saved in `outputs/charts/`.
+
+Key parameters
+- Time period: 01/01/2015 – 01/01/2025  
+- Universe: FTSE 100 index (^FTSE) and selected FTSE 100 equities  
+
+Decision log and methodology rationale
+
+I deliberately use the FTSE 100 index as the core market benchmark, as it is the most widely recognised UK equity index and avoids cherry-picking assets that could bias results. The FTSE is well covered, liquid, and suitable for drawing conclusions that are relevant to a broad investor base.
+
+The 10-year time horizon was chosen as a balance between statistical stability and economic relevance. Shorter samples tend to produce estimates that are overly sensitive to specific market regimes, while longer samples can dilute recent structural changes in markets.
+
+This period captures multiple distinct regimes:
+- Low-rate, QE-driven markets (2015–2019)
+- COVID shock and recovery (2020–2021)
+- Inflation, rate hikes, and elevated volatility (2022–2024)
+
+Including multiple regimes is important because correlations and diversification benefits change during periods of market stress. Assets that appear diversified in stable environments may become highly correlated during crises, which has direct implications for portfolio risk management.
+
+
+
+
+
+
+
+
