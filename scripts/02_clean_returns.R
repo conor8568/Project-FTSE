@@ -46,4 +46,5 @@ returns_monthly <- prices %>%
 write_csv(returns_daily, "outputs/tables/returns_daily.csv")
 write_csv(returns_monthly, "outputs/tables/returns_monthly.csv")
 
-
+message("Saved: outputs/tables/returns_daily.csv")
+message("Saved: outputs/tables/returns_monthly.csv")
