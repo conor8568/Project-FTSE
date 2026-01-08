@@ -28,6 +28,7 @@ returns_daily <- prices %>%
   mutate(return = log(adjusted / dplyr::lag(adjusted))) %>%
   ungroup() %>%
   filter(!is.na(return)) %>%
+  filter(is.finite(return)) %>%
   select(symbol, date, return)
 
 # Monthly log returns (month-end prices)
@@ -40,6 +41,7 @@ returns_monthly <- prices %>%
   mutate(return = log(price / dplyr::lag(price))) %>%
   ungroup() %>%
   filter(!is.na(return)) %>%
+  filter(is.finite(return)) %>%
   select(symbol, month, return)
 
 # Save
