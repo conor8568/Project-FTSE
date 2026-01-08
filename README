@@ -3,11 +3,11 @@ FTSE 100 Risk & Portfolio Analysis
 This project analyses FTSE 100 equities to compare risk–return characteristics, correlations, and diversification benefits, and to construct simple benchmark portfolios using historical UK equity data.
 
 Contents
-- Data pull from Yahoo Finance
-- Volatility and risk analysis
-- Correlation heatmap
-- Portfolio construction (benchmark portfolios)
-- Exported charts for portfolio and presentation use
+  - Data pull from Yahoo Finance
+  - Volatility and risk analysis
+  - Correlation heatmap
+  - Portfolio construction (benchmark portfolios)
+  - Exported charts for portfolio and presentation use
 
 How to run
 1. Open the RStudio project: **Project FTSE**
@@ -19,21 +19,40 @@ How to run
 
 Outputs
 Chart outputs are saved in `outputs/charts/`.
+Intermediate data and analysis tables are saved in outputs/tables/
+
+Data structure
+The following datasets are produced during the data preparation stage:
+	- prices_daily.csv
+    Daily adjusted close prices for each asset. Adjusted prices account for dividends and corporate actions.
+  - returns_daily.csv
+    Daily log returns computed from adjusted prices. Used for volatility and correlation analysis.
+	- returns_monthly.csv
+    Monthly log returns computed using month-end adjusted prices. Used for portfolio construction to reduce short-term noise.
 
 Key parameters
-- Time period: 01/01/2015 – 01/01/2025  
-- Universe: FTSE 100 index (^FTSE) and selected FTSE 100 equities  
+  - Time period: 01/01/2015 – 01/01/2025  
+  - Universe: FTSE 100 index (^FTSE) and selected FTSE 100 equities  
 
+Portfolio assumptions
+Portfolio analysis is conducted using monthly returns to reflect a medium to long-term investment horizon.
+
+Two simple benchmark portfolios are constructed:
+	- Equal-weight portfolio (long-only)
+	- Minimum-variance portfolio (long-only, weights sum to one)
+
+Short selling is not permitted, and portfolios are evaluated relative to the FTSE 100 benchmark.
+Risk adjusted performance metrics are computed using annualised return and volatility (Sharpe ratios are calculated assuming a zero risk-free rate for simplicity).
 Decision log and methodology rationale
 
 I deliberately use the FTSE 100 index as the core market benchmark, as it is the most widely recognised UK equity index and avoids cherry-picking assets that could bias results. The FTSE is well covered, liquid, and suitable for drawing conclusions that are relevant to a broad investor base.
 
-The 10-year time horizon was chosen as a balance between statistical stability and economic relevance. Shorter samples tend to produce estimates that are overly sensitive to specific market regimes, while longer samples can dilute recent structural changes in markets.
+The time horizon of 10 years was chosen as a balance between statistical stability and economic relevance. Shorter samples tend to produce estimates that are sensitive to specific market regimes, while longer samples can dilute recent structural changes in markets.
 
 This period captures multiple distinct regimes:
-- Low-rate, QE-driven markets (2015–2019)
-- COVID shock and recovery (2020–2021)
-- Inflation, rate hikes, and elevated volatility (2022–2024)
+  - Lower rate, QE-driven markets from 2015–2019
+  - COVID shock and recovery from 2020–2021
+  - Inflation, rate hikes, and elevated volatility from 2022–2024 
 
 Including multiple regimes is important because correlations and diversification benefits change during periods of market stress. Assets that appear diversified in stable environments may become highly correlated during crises, which has direct implications for portfolio risk management.
 
