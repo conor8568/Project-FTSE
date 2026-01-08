@@ -5,6 +5,9 @@
 library(tidyverse)
 library(lubridate)
 
+# Create output folders if they don't exist
+dir.create("outputs/tables", showWarnings = FALSE, recursive = TRUE)
+
 # Load prices
 prices <- read_csv("outputs/tables/prices_daily.csv", show_col_types = FALSE)
 
