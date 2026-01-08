@@ -24,6 +24,7 @@ tickers <- c("^FTSE",     # FTSE 100 index
 )
 
 #adjusted prices
+# Use adjusted prices to account for dividends and corporate actions
 prices_raw <- tq_get(tickers, from = start_date)
 
 #checks
