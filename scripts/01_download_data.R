@@ -5,7 +5,7 @@ library(lubridate)
 
 # Settings
 start_date <- as.Date("2015-01-01")
-end_date <- as.date("2025-01-01")
+end_date <- as.Date("2025-01-01")
 
 #tickers
 tickers <- c("^FTSE",     # FTSE 100 index
