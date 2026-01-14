@@ -11,7 +11,8 @@ Contents
 
 How to run
 1. Open the RStudio project: **Project FTSE**
-2. Run scripts in order:
+2. Install required packages listed in `requirements.R`
+3. Run scripts in order:
    - `scripts/01_download_data.R`
    - `scripts/02_clean_returns.R`
    - `scripts/03_analysis_portfolios.R`
