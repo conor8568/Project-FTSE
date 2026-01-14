@@ -55,26 +55,24 @@ port_eq <- as.numeric(stocks_mat %*% w_eq)
 # s.t. sum(w)=1 and w_i >= 0
 
 Sigma <- cov(stocks_mat)
+Sigma <- Sigma + diag(1e-6, n)  # small ridge here for numerical stability
 
 # quadprog formulation:
 # min 1/2 w' D w - d' w
 Dmat <- 2 * Sigma
 dvec <- rep(0, n)
 
-# Constraints: A' w >= b
-# 1) sum(w) = 1  -> implement as two inequalities:
-#    sum(w) >= 1 and -sum(w) >= -1
-# 2) w_i >= 0 for all i
+# Constraints: sum(w) = 1 (equality) and w >= 0 (inequality)
 Amat <- cbind(
-  rep(1, n),          # sum(w) >= 1
-  -rep(1, n),         # -sum(w) >= -1
+  rep(1, n),          # sum(w) = 1
   diag(n)             # w_i >= 0
 )
-bvec <- c(1, -1, rep(0, n))
+bvec <- c(1, rep(0, n))
 
-sol <- solve.QP(Dmat = Dmat, dvec = dvec, Amat = Amat, bvec = bvec, meq = 0)
+sol <- solve.QP(Dmat = Dmat, dvec = dvec, Amat = Amat, bvec = bvec, meq = 1)
 
 w_minvar <- sol$solution
+
 # Normalise (numerical stability)
 w_minvar <- pmax(w_minvar, 0)
 w_minvar <- w_minvar / sum(w_minvar)
