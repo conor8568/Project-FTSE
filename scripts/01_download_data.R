@@ -1,7 +1,6 @@
 # Packages
 library(tidyverse)
 library(tidyquant)
-library(lubridate)
 
 # Settings
 start_date <- as.Date("2015-01-01")
@@ -38,6 +37,9 @@ prices <- prices_raw %>%
     adjusted = as.numeric(adjusted)
   ) %>%
   arrange(symbol, date)
+
+stopifnot(min(prices$date) >= start_date)
+stopifnot(max(prices$date) <= end_date)
 
 dir.create("outputs/tables", showWarnings = FALSE, recursive = TRUE)
 write_csv(prices, "outputs/tables/prices_daily.csv")
