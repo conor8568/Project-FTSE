@@ -21,6 +21,8 @@ prices <- prices %>%
   ) %>%
   arrange(symbol, date)
 
+stopifnot(all(prices$adjusted > 0, na.rm = TRUE))
+
 # Daily log returns
 returns_daily <- prices %>%
   group_by(symbol) %>%
@@ -35,6 +37,7 @@ returns_daily <- prices %>%
 returns_monthly <- prices %>%
   mutate(month = floor_date(date, "month")) %>%
   group_by(symbol, month) %>%
+  arrange(date, .by_group = TRUE) %>%  
   summarise(price = dplyr::last(adjusted), .groups = "drop") %>%
   group_by(symbol) %>%
   arrange(month) %>%
