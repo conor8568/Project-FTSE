@@ -93,9 +93,11 @@ ann_factor <- 12
 perf <- port_rets %>%
   select(-month) %>%
   summarise(across(everything(), list(
-    ann_return = ~ (prod(1 + .x)^(ann_factor / length(.x)) - 1),
+    ann_return = ~ (exp(mean(.x) * ann_factor) - 1),
+    
     ann_vol = ~ sd(.x) * sqrt(ann_factor),
-    sharpe_0rf = ~ ((prod(1 + .x)^(ann_factor / length(.x)) - 1) / (sd(.x) * sqrt(ann_factor))) #rf assumed 0
+    
+    sharpe_0rf = ~ ((mean(.x) * ann_factor) / (sd(.x) * sqrt(ann_factor)))
   ), .names = "{.col}__{.fn}"))
 
 # Tidy the performance  table
