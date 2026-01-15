@@ -1,19 +1,19 @@
-FTSE 100 Risk & Portfolio Analysis
+# FTSE 100 Risk & Portfolio Analysis
 
 This project analyses FTSE 100 equities to compare risk–return characteristics, correlations, and diversification benefits, and to construct simple benchmark portfolios using historical UK equity data.
 
-Executive Summary
+## Executive Summary
 This project analyses FTSE 100 equities over a 10 year period (2015–2025) to examine risk and return characteristics, correlation structures, and diversification benefits. Using daily and monthly log returns, I construct benchmark portfolios (equal weight and minimum variance, long only) and compare their performance against the FTSE 100 index.
 Results show that the minimum variance portfolio achieved lower volatility and shallower drawdowns, particularly during periods of market stress illustrating the practical benefits of diversification and portfolio construction techniques.
 
-Contents
+## Contents
   - Data pull from Yahoo Finance
   - Volatility and risk analysis
   - Correlation heatmap
   - Portfolio construction (benchmark portfolios)
   - Exported charts for portfolio and presentation use
 
-How to run
+## How to run
 1. Open the RStudio project: **Project FTSE**
 2. Install required packages listed in `requirements.R`
 3. Run scripts in order:
@@ -22,11 +22,25 @@ How to run
    - `scripts/03_analysis_portfolios.R`
    - `scripts/04_make_charts.R`
 
-Outputs
+## Outputs
 Chart outputs are saved in `outputs/charts/`.
 Intermediate data and analysis tables are saved in outputs/tables/
 
-Data structure
+### Key charts
+
+#### Cumulative growth of £1
+![](outputs/charts/01_cumulative_returns.png)
+
+#### Risk vs return
+![](outputs/charts/02_risk_return_scatter.png)
+
+#### Correlation heatmap
+![](outputs/charts/03_correlation_heatmap.png)
+
+#### Rolling volatility
+![](outputs/charts/04_rolling_volatility.png)
+
+### Data structure
 The following datasets are produced during the data preparation stage:
 	- prices_daily.csv
     Daily adjusted close prices for each asset. Adjusted prices account for dividends and corporate actions.
@@ -35,11 +49,11 @@ The following datasets are produced during the data preparation stage:
 	- returns_monthly.csv
     Monthly log returns computed using month-end adjusted prices. Used for portfolio construction to reduce short-term noise.
 
-Key parameters
+### Key parameters
   - Time period: 01/01/2015 – 01/01/2025  
   - Universe: FTSE 100 index (^FTSE) and selected FTSE 100 equities  
 
-Portfolio assumptions
+## Portfolio assumptions
 Portfolio analysis is conducted using monthly returns to reflect a medium to long-term investment horizon.
 
 Two simple benchmark portfolios are constructed:
@@ -48,8 +62,8 @@ Two simple benchmark portfolios are constructed:
 
 Short selling is not permitted, and portfolios are evaluated relative to the FTSE 100 benchmark.
 Risk adjusted performance metrics are computed using annualised return and volatility (Sharpe ratios are calculated assuming a zero risk-free rate for simplicity).
-Decision log and methodology rationale
 
+### Decision log and methodology rationale
 I deliberately use the FTSE 100 index as the core market benchmark, as it is the most widely recognised UK equity index and avoids cherry-picking assets that could bias results. The FTSE is well covered, liquid, and suitable for drawing conclusions that are relevant to a broad investor base.
 
 The time horizon of 10 years was chosen as a balance between statistical stability and economic relevance. Shorter samples tend to produce estimates that are sensitive to specific market regimes, while longer samples can dilute recent structural changes in markets.
@@ -61,7 +75,7 @@ This period captures multiple distinct regimes:
 
 Including multiple regimes is important because correlations and diversification benefits change during periods of market stress. Assets that appear diversified in stable environments may become highly correlated during crises, which has direct implications for portfolio risk management.
 
-Key Findings
+## Key Findings
   - Minimum variance portfolio delivered lower volatility than the FTSE across regimes
   - Diversification benefits crumble during stress periods (e.g. COVID 19)
   - Individual equities exhibit higher volatility than the index
